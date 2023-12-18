@@ -5,7 +5,6 @@ import { Wrapper } from './UserMenu.styled';
 import { logOut } from '../../redux/auth/operations';
 import IconButton from '@mui/material/IconButton';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
 
 export const UserMenu = () => {
   function stringToColor(string) {
