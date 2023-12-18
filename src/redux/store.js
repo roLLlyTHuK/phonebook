@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { todosReducer } from './todo/taskSlice';
 import { contactsReducer } from './contacts/contactsSlice';
 import { filterReducer } from './contacts/filterSlice';
 import { authReducer } from './auth/slice';
+import { filtersSlice } from './todo/filtersSlice'; // Добавляем этот импорт
+
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -22,6 +25,8 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
+    todos: todosReducer,
+    filters: filtersSlice.reducer, // Добавляем фильтры в корневой редюсер
     contacts: contactsReducer,
     filter: filterReducer,
     auth: persistReducer(authPersistConfig, authReducer),

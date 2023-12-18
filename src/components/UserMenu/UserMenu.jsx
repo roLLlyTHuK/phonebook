@@ -1,8 +1,11 @@
-import { Avatar, Button } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
-import { Name, Wrapper } from './UserMenu.styled';
+import { Wrapper } from './UserMenu.styled';
 import { logOut } from '../../redux/auth/operations';
+import IconButton from '@mui/material/IconButton';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from 'react-router-dom';
 
 export const UserMenu = () => {
   function stringToColor(string) {
@@ -47,12 +50,15 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <Avatar {...nameAvatar(user.name)} sx={{ bgcolor: '#1976d2' }} />
-
-      <Name>{user.email}</Name>
-      <Button variant="contained" onClick={() => dispatch(logOut())}>
-        Log Out
-      </Button>
+      <Avatar {...nameAvatar(user.name)} variant="rounded" />
+      <IconButton
+        size="large"
+        color="inherit"
+        aria-label="logout"
+        onClick={() => dispatch(logOut())}
+      >
+        <LogoutIcon fontSize="inherit" />
+      </IconButton>
     </Wrapper>
   );
 };

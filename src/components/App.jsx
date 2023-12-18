@@ -1,5 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
-import { Home, Login, Signup, Contacts } from '../pages';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { Home, Contacts, Auth, Profile, ToDoPage } from '../pages';
 import { Layout } from './Layout/Layout';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -19,15 +19,9 @@ export function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path="/register"
+          path="/auth"
           element={
-            <RestrictedRoute redirectTo="/contacts" component={<Signup />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            <RestrictedRoute redirectTo="/contacts" component={<Auth />} />
           }
         />
         <Route
@@ -36,7 +30,17 @@ export function App() {
             <PrivateRoute redirectTo="/login" component={<Contacts />} />
           }
         />
-        <Route path="*" element={<Home />} />
+        <Route
+          path="/profile"
+          element={<PrivateRoute redirectTo="/login" component={<Profile />} />}
+        />
+        <Route
+          path="/todo"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ToDoPage />} />
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
   );
